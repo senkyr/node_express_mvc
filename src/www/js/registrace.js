@@ -41,7 +41,7 @@ function registrovat() {
         heslo: $("#heslo").val().trim(),
     });
     
-    fetch("/registrace", {
+    fetch("/registrovat", {
         method: "POST",
         headers: {
             "Content-type": "application/json",

@@ -64,18 +64,11 @@ server.get('/uzivatel(.json)?', (dotaz, odpoved, pokracovani) => {
     }
 });
 
-// odhlaseni prihlaseneho uzivatele
-server.get('/odhlasit', (dotaz, odpoved, pokracovani) => {
-    dotaz.session.destroy();
-
-    odpoved.redirect('/');
-});
-
 // vsechno ostatni je pristupne jako staticke soubory
 server.use(express.static(path.join(__dirname, 'www')));
 
 // registrace uzivatele
-server.post(['/registrace(.html)?'], (dotaz, odpoved) => {
+server.post('/registrovat', (dotaz, odpoved) => {
     let jmeno = dotaz.body.jmeno;
     let heslo = dotaz.body.heslo;
     let email = dotaz.body.email;
@@ -93,7 +86,7 @@ server.post(['/registrace(.html)?'], (dotaz, odpoved) => {
 });
 
 // prihlaseni uzivatele
-server.post(['/prihlaseni(.html)?'], (dotaz, odpoved) => {
+server.post('/prihlasit', (dotaz, odpoved) => {
     let jmeno = dotaz.body.jmeno;
     let heslo = dotaz.body.heslo;
 
@@ -109,6 +102,29 @@ server.post(['/prihlaseni(.html)?'], (dotaz, odpoved) => {
 
             odpoved.json({ uspech: true, url: '/profil' });
         }
+    }
+});
+
+// odhlaseni prihlaseneho uzivatele
+server.get('/odhlasit', (dotaz, odpoved, pokracovani) => {
+    dotaz.session.destroy();
+
+    odpoved.redirect('/');
+});
+
+// smazani uzivatele
+server.post('/smazat', (dotaz, odpoved, pokracovani) => {
+    let jmeno = dotaz.session.uzivatel;
+    let heslo = dotaz.body.heslo;
+
+    let uzivatel = db_uzivatele.get(jmeno);
+
+    if(!bcrypt.compareSync(heslo, uzivatel.heslo)) {
+        odpoved.json({ uspech: false, hlaseni: 'Chybné heslo.'});
+    } else {
+        db_uzivatele.delete(jmeno);
+
+        odpoved.json({ uspech: true, url: '/odhlasit' });
     }
 });
 

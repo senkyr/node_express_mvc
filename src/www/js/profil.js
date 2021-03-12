@@ -3,6 +3,10 @@ $(document).ready(() => {
         location.href = '/odhlasit';
     });
 
+    $("#smazat").click(() => {
+        location.href = '/smazani';
+    });
+
     fetch("/uzivatel.json")
         .then(odpoved => odpoved.json())
         .then(uzivatel => {
