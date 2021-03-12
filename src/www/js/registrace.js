@@ -54,7 +54,7 @@ function registrovat() {
         if(reakce.uspech) {
             location.href = reakce.url;
         } else {
-            $("#hlaseni") = reakce.hlaseni;
+            $("#hlaseni").html(reakce.hlaseni);
         }
     });
 }
