@@ -39,20 +39,27 @@ server.get(['/', '/index(.html)?'], (dotaz, odpoved, pokracovani) => {
         odpoved.redirect('/profil');
 });
 
+// zkracene URL se doplni o adresar s HTML soubory
+server.get(['/prihlaseni(.html)?', '/registrace(.html)?', '/profil(.html)?', '/smazani(.html)?'], (dotaz, odpoved, pokracovani) => {
+    dotaz.url = '/html' + dotaz.url;
+
+    pokracovani();
+});
+
+// zkracene URL se doplni o koncovku HTML souboru
+server.get(['(/html)?/prihlaseni', '(/html)?/registrace', '(/html)?/profil', '(/html)?/smazani'], (dotaz, odpoved, pokracovani) => {
+    dotaz.url = dotaz.url + '.html';
+
+    pokracovani();
+});
+
 // nektere casti muze videt pouze radne prihlaseny uzivatel
-server.get(['/profil(.html)?', '/smazani(.html)?'], (dotaz, odpoved, pokracovani) => {
+server.get(['/profil', '/smazani?'], (dotaz, odpoved, pokracovani) => {
     if(dotaz.session.uzivatel == undefined) {
         odpoved.redirect('/prihlaseni')
     } else {
         pokracovani();
     }
-});
-
-// zkracene URL se doplni o koncovky souboru
-server.get(['/prihlaseni', '/registrace', '/profil', '/smazani'], (dotaz, odpoved, pokracovani) => {
-    dotaz.url += '.html';
-
-    pokracovani();
 });
 
 // informace o prihlasenem uzivateli
@@ -128,6 +135,7 @@ server.post('/smazat', (dotaz, odpoved, pokracovani) => {
     }
 });
 
+// spusteni serveru
 server.listen(port, () => {
     console.log(`Server běží na http://${hostname}:${port}...`);
 });
