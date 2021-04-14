@@ -33,9 +33,9 @@ app.use(express.json());
 // nemame indexovou stranku
 app.get(['/', '/index(.html)?'], (dotaz, odpoved, pokracovani) => {
     if(dotaz.session.uzivatel == undefined)
-        odpoved.redirect('/prihlaseni');
+        return odpoved.redirect('/prihlaseni');
     else
-        odpoved.redirect('/profil');
+        return odpoved.redirect('/profil');
 });
 
 // zkracene URL se doplni o adresar s HTML soubory
@@ -55,7 +55,7 @@ app.get(['(/html)?/prihlaseni', '(/html)?/registrace', '(/html)?/profil', '(/htm
 // nektere casti muze videt pouze radne prihlaseny uzivatel
 app.get(['/profil', '/smazani?'], (dotaz, odpoved, pokracovani) => {
     if(dotaz.session.uzivatel == undefined) {
-        odpoved.redirect('/prihlaseni')
+        return odpoved.redirect('/prihlaseni')
     } else {
         pokracovani();
     }
@@ -115,7 +115,7 @@ app.post('/prihlasit', (dotaz, odpoved) => {
 app.get('/odhlasit', (dotaz, odpoved, pokracovani) => {
     dotaz.session.destroy();
 
-    odpoved.redirect('/');
+    return odpoved.redirect('/');
 });
 
 // smazani uzivatele
