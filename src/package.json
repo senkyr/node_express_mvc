@@ -15,6 +15,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "http": "^0.0.1-security",
+    "serve-favicon": "^2.5.0",
     "simple-json-db": "^1.2.3"
   }
 }

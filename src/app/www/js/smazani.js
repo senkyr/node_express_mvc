@@ -16,7 +16,7 @@ function spravne() {
 function potvrdit() {
     let udaje = JSON.stringify({ heslo: $("#heslo").val().trim() });
 
-    fetch("/smazat", {
+    fetch("/uzivatel/smazat", {
         method: "POST",
         headers: {
             "Content-type": "application/json",

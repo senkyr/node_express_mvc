@@ -32,7 +32,7 @@ function prihlasit() {
         heslo: $("#heslo").val().trim(),
     });
     
-    fetch("/prihlasit", {
+    fetch("/uzivatel/prihlasit", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
