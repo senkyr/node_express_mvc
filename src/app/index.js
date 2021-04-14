@@ -134,5 +134,5 @@ app.post('/smazat', (dotaz, odpoved, pokracovani) => {
     }
 });
 
-// export aplikace pro pouziti v appu
+// export aplikace pro pouziti v serveru
 module.exports = app;
