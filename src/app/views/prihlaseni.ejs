@@ -4,20 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrace</title>
-    <script src="/js/jquery-3.6.0.min.js"></script>
-    <script src="/js/registrace.js"></script>
+    <title>Přihlášení</title>
+    <script src="/js/lib/jquery.js"></script>
+    <script src="/js/prihlaseni.js"></script>
 </head>
 <body>
-    <h1>Registrace</h1>
+    <h1>Přihlášení</h1>
     <div>
         <input id="jmeno" placeholder="Jméno..." type="text" /><br />
-        <input id="email" placeholder="Email..." type="email" /><br />
         <input id="heslo" placeholder="Heslo..." type="password" /><br />
-        <input id="heslo_kontrola" placeholder="Heslo pro kontrolu..." type="password" /><br />
-        <button id="registrovat">Registrovat</button>
+        <button id="prihlasit">Přihlásit</button>
         <span id="hlaseni" style="color: red"></span><br />
-        <a href="/prihlaseni">Už máte účet?</a>
+        <a href="/uzivatel/registrace">Nemáte účet?</a>
     </div>
 </body>
 </html>

@@ -20,46 +20,20 @@ router.get([
         '/index(.html)?',
     ], (dotaz, odpoved) => {
 
-    odpoved.redirect('/profil');
+    odpoved.redirect('/uzivatel/profil');
 });
 
 // nektere casti muze videt pouze radne prihlaseny uzivatel
 router.get([
-    '(/html)?/profil(.html)?',
-    '(/html)?/smazani(.html)?',
+    '/uzivatel/profil',
+    '/uzivatel/smazani',
     ], (dotaz, odpoved, pokracovani) => {
     
     if(uzivatel_controller.neprihlaseny(dotaz, odpoved)) {
-        odpoved.redirect('/prihlaseni');
+        odpoved.redirect('/uzivatel/prihlaseni');
     } else {
         pokracovani();
     }
-});
-
-// zkracene URL se doplni o adresar s HTML soubory
-router.get([
-    '/prihlaseni(.html)?',
-    '/registrace(.html)?',
-    '/profil(.html)?',
-    '/smazani(.html)?',
-    ], (dotaz, odpoved, pokracovani) => {
-
-    dotaz.url = '/html' + dotaz.url;
-    
-    pokracovani();
-});
-
-// zkracene URL se doplni o koncovku HTML souboru
-router.get([
-    '(/html)?/prihlaseni',
-    '(/html)?/registrace',
-    '(/html)?/profil',
-    '(/html)?/smazani',
-], (dotaz, odpoved, pokracovani) => {
-    
-    dotaz.url = dotaz.url + '.html';
-    
-    pokracovani();
 });
 
 // export vysledneho routeru

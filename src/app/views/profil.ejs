@@ -5,12 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil</title>
-    <script src="/js/jquery-3.6.0.min.js"></script>
+    <script src="/js/lib/jquery.js"></script>
     <script src="/js/profil.js"></script>
 </head>
 <body>
     <h1>Profil</h1>
-    <p>Jste přihlášeni jako <span id="uzivatel" style="font-weight: bold"></span>.</p>
+    <p>Jste přihlášeni jako <span style="font-weight: bold"><%= uzivatel %></span>.</p>
     <button id="odhlasit">Odhlásit</button>
     <button id="smazat">Smazat účet</button>
 </body>

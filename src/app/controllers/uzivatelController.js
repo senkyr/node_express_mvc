@@ -29,7 +29,7 @@ exports.registrovat = (dotaz, odpoved) => {
     } else {
         Uzivatel.pridat(jmeno, heslo, email);
 
-        odpoved.json({ uspech: true, url: '/prihlaseni' });
+        odpoved.json({ uspech: true, url: '/uzivatel/prihlaseni' });
     }
 };
 
@@ -46,7 +46,7 @@ exports.prihlasit = (dotaz, odpoved) => {
         } else {
             dotaz.session.uzivatel = jmeno;
 
-            odpoved.json({ uspech: true, url: '/profil' });            
+            odpoved.json({ uspech: true, url: '/uzivatel/profil' });            
         }
     }
 };
@@ -74,4 +74,20 @@ exports.odhlasit = (dotaz, odpoved) => {
 // kontrola prihlaseneho uzivatele
 exports.neprihlaseny = (dotaz, odpoved) => {
     return (dotaz.session.uzivatel == undefined);
+};
+
+// renderovani views
+exports.registrace = (dotaz, odpoved) => {
+    odpoved.render('registrace');
+};
+exports.prihlaseni = (dotaz, odpoved) => {
+    odpoved.render('prihlaseni');
+};
+exports.smazani = (dotaz, odpoved) => {
+    odpoved.render('smazani');
+};
+exports.profil = (dotaz, odpoved) => {
+    odpoved.render('profil', {
+        uzivatel: dotaz.session.uzivatel,
+    });
 };

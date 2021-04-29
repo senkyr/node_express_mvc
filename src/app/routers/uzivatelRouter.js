@@ -21,6 +21,11 @@ router.get('/odhlasit', uzivatel_controller.odhlasit);
 router.post('/registrovat', uzivatel_controller.registrovat);
 router.post('/prihlasit', uzivatel_controller.prihlasit);
 router.post('/smazat', uzivatel_controller.smazat);
+// prevod HTTP dotazu na renderovani views (metoda GET)
+router.get('/registrace', uzivatel_controller.registrace);
+router.get('/prihlaseni', uzivatel_controller.prihlaseni);
+router.get('/smazani', uzivatel_controller.smazani);
+router.get('/profil', uzivatel_controller.profil);
 
 // export vysledneho routeru
 module.exports = router;

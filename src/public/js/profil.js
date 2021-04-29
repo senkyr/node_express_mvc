@@ -4,12 +4,14 @@ $(document).ready(() => {
     });
 
     $("#smazat").click(() => {
-        location.href = '/smazani';
+        location.href = '/uzivatel/smazani';
     });
 
     fetch("/uzivatel/informace")
         .then(odpoved => odpoved.json())
         .then(uzivatel => {
-            $("#uzivatel").html(uzivatel.jmeno);
+            if(!uzivatel) {
+                location.href = '/uzivatel/prihlaseni';
+            }
         });
 });

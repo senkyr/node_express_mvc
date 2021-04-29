@@ -7,7 +7,6 @@
 const path = require('path');
 // doinstalovane moduly
 const express = require('express');
-const favicon = require('serve-favicon');
 const session = require('express-session');
 
 // vytvoreni aplikace
@@ -17,6 +16,10 @@ const { key } = require(path.join(__dirname, '..', 'config'));
 // soucasti aplikace
 const indexRouter = require(path.join(__dirname, 'routers', 'indexRouter'));
 const uzivatelRouter = require(path.join(__dirname, 'routers', 'uzivatelRouter'));
+
+// pouzity templating engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // middleware pro praci se session
 app.use(session({
@@ -28,14 +31,12 @@ app.use(session({
 }));
 // middleware pro praci s JSON daty
 app.use(express.json());
-// middleware pro praci s favicon
-app.use(favicon(path.join(__dirname, 'www', 'favicon.ico')));
+// staticke soubory
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // routovani
 app.use('/', indexRouter);
 app.use('/uzivatel', uzivatelRouter);
-// staticke soubory
-app.use(express.static(path.join(__dirname, 'www')));
 
 // export aplikace pro pouziti v serveru
 module.exports = app;
