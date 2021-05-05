@@ -6,12 +6,4 @@ $(document).ready(() => {
     $("#smazat").click(() => {
         location.href = '/uzivatel/smazani';
     });
-
-    fetch("/uzivatel/informace")
-        .then(odpoved => odpoved.json())
-        .then(uzivatel => {
-            if(!uzivatel) {
-                location.href = '/uzivatel/prihlaseni';
-            }
-        });
 });
