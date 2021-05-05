@@ -78,16 +78,27 @@ exports.neprihlaseny = (dotaz, odpoved) => {
 
 // renderovani views
 exports.registrace = (dotaz, odpoved) => {
-    odpoved.render('uzivatel/registrace');
+    odpoved.render('uzivatel/registrace', {
+        titulek: 'Registrace',
+        klient: 'uzivatel/registrace.js',
+    });
 };
 exports.prihlaseni = (dotaz, odpoved) => {
-    odpoved.render('uzivatel/prihlaseni');
+    odpoved.render('uzivatel/prihlaseni', {
+        titulek: 'Přihlášení',
+        klient: 'uzivatel/prihlaseni.js',
+    });
 };
 exports.smazani = (dotaz, odpoved) => {
-    odpoved.render('uzivatel/smazani');
+    odpoved.render('uzivatel/smazani', {
+        titulek: 'Smazání účtu',
+        klient: 'uzivatel/smazani.js',
+    });
 };
 exports.profil = (dotaz, odpoved) => {
     odpoved.render('uzivatel/profil', {
+        titulek: 'Profil',
+        klient: 'uzivatel/profil.js',
         uzivatel: dotaz.session.uzivatel,
     });
 };

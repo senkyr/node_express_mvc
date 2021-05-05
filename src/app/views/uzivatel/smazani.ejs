@@ -1,20 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zrušení</title>
-    <script src="/js/lib/jquery.js"></script>
-    <script src="/js/smazani.js"></script>
-</head>
-<body>
-    <h1>Smazání účtu</h1>
-    <div>
-        <input id="heslo" placeholder="Zadejte svoje heslo..." type="password" /><br />
-        <button id="potvrdit">Potvrdit smazání účtu</button>
-        <span id="hlaseni" style="color: red"></span><br />
-        <a href="/uzivatel/profil">Zpět na profil</a>
-    </div>
-</body>
-</html>
+<%- include('../layout/hlavicka'); %>
+
+<div>
+    <input id="heslo" placeholder="Zadejte svoje heslo..." type="password" /><br />
+    <button id="potvrdit">Potvrdit smazání účtu</button>
+    <span id="hlaseni" style="color: red"></span><br />
+    <a href="/uzivatel/profil">Zpět na profil</a>
+</div>
+
+<%- include('../layout/paticka'); %>

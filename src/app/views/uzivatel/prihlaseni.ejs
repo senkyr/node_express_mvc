@@ -1,21 +1,11 @@
-<!DOCTYPE html>
-<html lang="cs">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Přihlášení</title>
-    <script src="/js/lib/jquery.js"></script>
-    <script src="/js/prihlaseni.js"></script>
-</head>
-<body>
-    <h1>Přihlášení</h1>
-    <div>
-        <input id="jmeno" placeholder="Jméno..." type="text" /><br />
-        <input id="heslo" placeholder="Heslo..." type="password" /><br />
-        <button id="prihlasit">Přihlásit</button>
-        <span id="hlaseni" style="color: red"></span><br />
-        <a href="/uzivatel/registrace">Nemáte účet?</a>
-    </div>
-</body>
-</html>
+<%- include('../layout/hlavicka'); %>
+
+<div>
+    <input id="jmeno" placeholder="Jméno..." type="text" /><br />
+    <input id="heslo" placeholder="Heslo..." type="password" /><br />
+    <button id="prihlasit">Přihlásit</button>
+    <span id="hlaseni" style="color: red"></span><br />
+    <a href="/uzivatel/registrace">Nemáte účet?</a>
+</div>
+
+<%- include('../layout/paticka'); %>
