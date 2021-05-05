@@ -7,8 +7,8 @@
 const path = require('path');
 
 // pouzite modely
-const uzivatel_model = require(path.join(__dirname, '..', 'models', 'uzivatel'));
-const poznamka_model = require(path.join(__dirname, '..', 'models', 'poznamka'));
+const uzivatel_model = require(path.join(__dirname, '..', 'models', 'uzivatelModel'));
+const poznamka_model = require(path.join(__dirname, '..', 'models', 'poznamkaModel'));
 
 // informace o prihlasenem uzivateli
 exports.informace = (dotaz, odpoved) => {

@@ -7,7 +7,7 @@
 const path = require('path');
 
 // pouzity model
-const model = require(path.join(__dirname, '..', 'models', 'poznamka.js'));
+const model = require(path.join(__dirname, '..', 'models', 'poznamkaModel'));
 
 // pomocny controller
 const uzivatel_controller = require(path.join(__dirname, '..', 'controllers', 'uzivatelController'));
