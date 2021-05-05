@@ -16,6 +16,7 @@ const { key } = require(path.join(__dirname, '..', 'config'));
 // soucasti aplikace
 const indexRouter = require(path.join(__dirname, 'routers', 'indexRouter'));
 const uzivatelRouter = require(path.join(__dirname, 'routers', 'uzivatelRouter'));
+const poznamkaRouter = require(path.join(__dirname, 'routers', 'poznamkaRouter'));
 
 // pouzity templating engine
 app.set('view engine', 'ejs');
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // routovani
 app.use('/', indexRouter);
 app.use('/uzivatel', uzivatelRouter);
+app.use('/poznamka', poznamkaRouter);
 
 // export aplikace pro pouziti v serveru
 module.exports = app;

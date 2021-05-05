@@ -11,7 +11,7 @@ const express = require('express');
 // vytvoreni routeru
 const router = express.Router();
 
-// pouzity controller
+// pomocny controller
 const uzivatel_controller = require(path.join(__dirname, '..', 'controllers', 'uzivatelController'));
 
 // nemame indexovou stranku
@@ -29,7 +29,18 @@ router.get([
     '/uzivatel/smazani',
     ], (dotaz, odpoved, pokracovani) => {
     
-    if(uzivatel_controller.neprihlaseny(dotaz, odpoved)) {
+    if(uzivatel_controller.neprihlaseny(dotaz)) {
+        odpoved.redirect('/uzivatel/prihlaseni');
+    } else {
+        pokracovani();
+    }
+});
+router.get([
+    '/poznamka/pridani',
+    '/poznamka/vsechny',
+    ], (dotaz, odpoved, pokracovani) => {
+    
+    if(uzivatel_controller.neprihlaseny(dotaz)) {
         odpoved.redirect('/uzivatel/prihlaseni');
     } else {
         pokracovani();

@@ -71,9 +71,12 @@ exports.odhlasit = (dotaz, odpoved) => {
     odpoved.redirect('/');
 };
 
-// kontrola prihlaseneho uzivatele
-exports.neprihlaseny = (dotaz, odpoved) => {
+// pomocne funkce pro ostatni controllery
+exports.neprihlaseny = (dotaz) => {
     return (dotaz.session.uzivatel == undefined);
+};
+exports.prihlaseny = (dotaz) => {
+    return dotaz.session.uzivatel;
 };
 
 // renderovani views

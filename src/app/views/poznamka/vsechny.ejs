@@ -1,0 +1,20 @@
+<%- include('../layout/hlavicka') %>
+
+<a href="/uzivatel/profil">Zpět na profil</a>
+
+<div>
+    <% if(!poznamky) { %>
+        <b>Nemáte dosud žádné poznámky.</b>
+    <% } else { %>
+        <% poznamky.forEach((poznamka) => { %>
+        <div>
+            <a href="/poznamka/detail/<%= poznamka.id %>">Detail</a>
+            <b><%= poznamka.nadpis %></b>
+            <i>(<%= poznamka.cas.toLocaleDateString('cs-cz') %>)</i>
+            <a href="/poznamka/smazat/<%= poznamka.id %>">Smazat</a>
+        </div>
+        <% }); %>
+    <% } %>
+</div>
+
+<%- include('../layout/paticka') %>
