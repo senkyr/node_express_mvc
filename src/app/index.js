@@ -32,7 +32,7 @@ app.use(session({
 // middleware pro praci s JSON daty
 app.use(express.json());
 // staticke soubory
-app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // routovani
 app.use('/', indexRouter);
