@@ -78,16 +78,16 @@ exports.neprihlaseny = (dotaz, odpoved) => {
 
 // renderovani views
 exports.registrace = (dotaz, odpoved) => {
-    odpoved.render('registrace');
+    odpoved.render('uzivatel/registrace');
 };
 exports.prihlaseni = (dotaz, odpoved) => {
-    odpoved.render('prihlaseni');
+    odpoved.render('uzivatel/prihlaseni');
 };
 exports.smazani = (dotaz, odpoved) => {
-    odpoved.render('smazani');
+    odpoved.render('uzivatel/smazani');
 };
 exports.profil = (dotaz, odpoved) => {
-    odpoved.render('profil', {
+    odpoved.render('uzivatel/profil', {
         uzivatel: dotaz.session.uzivatel,
     });
 };
