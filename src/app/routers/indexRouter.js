@@ -38,6 +38,8 @@ router.get([
 router.get([
     '/poznamka/pridani',
     '/poznamka/vsechny',
+    '/poznamka/detail',
+    '/poznamka/smazat',
     ], (dotaz, odpoved, pokracovani) => {
     
     if(uzivatel_controller.neprihlaseny(dotaz)) {

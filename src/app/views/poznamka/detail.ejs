@@ -1,0 +1,13 @@
+<%- include('../layout/hlavicka') %>
+
+<a href="/uzivatel/profil">Zpět na profil</a>
+<a href="/poznamka/prehled">Moje poznámky</a>
+
+<div>
+    <b><%= poznamka.nadpis %></b>
+    <i><%= poznamka.cas.toLocaleDateString('cs-cz') %></i>
+    <a href="/poznamka/smazat/<%= poznamka.id %>">Smazat</a>
+    <p><%= poznamka.telo %></p>
+</div>
+
+<%- include('../layout/paticka') %>

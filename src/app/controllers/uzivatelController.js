@@ -6,15 +6,18 @@
 // vestavene moduly
 const path = require('path');
 
-// pouzity model
-const model = require(path.join(__dirname, '..', 'models', 'uzivatel'));
+// pouzite modely
+const uzivatel_model = require(path.join(__dirname, '..', 'models', 'uzivatel'));
+const poznamka_model = require(path.join(__dirname, '..', 'models', 'poznamka'));
 
 // informace o prihlasenem uzivateli
 exports.informace = (dotaz, odpoved) => {
     if(dotaz.session.uzivatel == undefined) {
         odpoved.json();
     } else {
-        odpoved.json({ jmeno: dotaz.session.uzivatel });
+        odpoved.json({
+            jmeno: dotaz.session.uzivatel
+        });
     }
 };
 
@@ -24,12 +27,18 @@ exports.registrovat = (dotaz, odpoved) => {
     let heslo = dotaz.body.heslo;
     let email = dotaz.body.email;
 
-    if(model.existuje(jmeno)) {
-        odpoved.json({ uspech: false, hlaseni: 'Vyberte jiné jméno.'});
+    if(uzivatel_model.existuje(jmeno)) {
+        odpoved.json({
+            uspech: false,
+            hlaseni: 'Vyberte jiné jméno.',
+        });
     } else {
-        model.pridat(jmeno, heslo, email);
+        uzivatel_model.pridat(jmeno, heslo, email);
 
-        odpoved.json({ uspech: true, url: '/uzivatel/prihlaseni' });
+        odpoved.json({
+            uspech: true,
+            url: '/uzivatel/prihlaseni',
+        });
     }
 };
 
@@ -38,15 +47,24 @@ exports.prihlasit = (dotaz, odpoved) => {
     let jmeno = dotaz.body.jmeno;
     let heslo = dotaz.body.heslo;
 
-    if(!model.existuje(jmeno)) {
-        odpoved.json({ uspech: false, hlaseni: 'Uživatel neexistuje.'});
+    if(!uzivatel_model.existuje(jmeno)) {
+        odpoved.json({
+            uspech: false,
+            hlaseni: 'Uživatel neexistuje.',
+        });
     } else {
-        if(!model.overit(jmeno, heslo)) {
-            odpoved.json({ uspech: false, hlaseni: 'Chybné heslo.'});
+        if(!uzivatel_model.overit(jmeno, heslo)) {
+            odpoved.json({
+                uspech: false,
+                hlaseni: 'Chybné heslo.',
+            });
         } else {
             dotaz.session.uzivatel = jmeno;
 
-            odpoved.json({ uspech: true, url: '/uzivatel/profil' });            
+            odpoved.json({
+                uspech: true,
+                url: '/uzivatel/profil',
+            });            
         }
     }
 };
@@ -56,12 +74,20 @@ exports.smazat = (dotaz, odpoved) => {
     let jmeno = dotaz.session.uzivatel;
     let heslo = dotaz.body.heslo;
 
-    if(!model.overit(jmeno, heslo)) {
-        odpoved.json({ uspech: false, hlaseni: 'Chybné heslo.'});
+    if(!uzivatel_model.overit(jmeno, heslo)) {
+        odpoved.json({
+            uspech: false,
+            hlaseni: 'Chybné heslo.',
+        });
     } else {
-        model.odebrat(jmeno);
+        uzivatel_model.odebrat(jmeno);
 
-        odpoved.json({ uspech: true, url: '/uzivatel/odhlasit' });
+        poznamka_model.zapomenout(jmeno);
+
+        odpoved.json({
+            uspech: true,
+            url: '/uzivatel/odhlasit',
+        });
     }
 };
 

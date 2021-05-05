@@ -9,27 +9,27 @@ const path = require('path');
 const jsondb = require('simple-json-db');
 
 // pripojeni k databazi
-const db_poznamky = new jsondb(path.join(__dirname, '..', '..', '..', 'data', 'poznamky.json'));
+const databaze = new jsondb(path.join(__dirname, '..', '..', '..', 'data', 'poznamky.json'));
 
 // inicializace prazdne databaze
-if(!db_poznamky.has('id')) {
-    db_poznamky.set('id', 1);
+if(!databaze.has('id')) {
+    databaze.set('id', 1);
 }
 
 // pridani nove poznamky o databaze
 exports.nova = (nadpis, telo, cas, autor) => {
-    let id = db_poznamky.get('id');
+    let id = databaze.get('id');
 
-    db_poznamky.set('id', id + 1);
+    databaze.set('id', id + 1);
 
-    db_poznamky.set(id, {
+    databaze.set(id, {
         nadpis, telo, cas, autor,
     });
 };
 
 // ziskani vsech poznamek daneho autora
-exports.vlastni = (autor) => {
-    let db_dump = db_poznamky.JSON();
+exports.vsechny = (autor) => {
+    let db_dump = databaze.JSON();
 
     let vysledek = [];
 
@@ -44,4 +44,30 @@ exports.vlastni = (autor) => {
     }
 
     return vysledek;
+};
+
+// ziskani jedne konkretni poznamky
+exports.nacist = (id) => {
+    let poznamka = databaze.get(id);
+
+    poznamka.cas = new Date(poznamka.cas);
+    poznamka.id = id;
+
+    return poznamka;
+};
+
+// odebrani jedne konkretni poznamky
+exports.odebrat = (id) => {
+    databaze.delete(id);
+};
+
+// odebrani vsech poznamek konkretniho uzivatele
+exports.zapomenout = (autor) => {
+    let db_dump = databaze.JSON();
+
+    for(id in db_dump) {
+        if(db_dump[id].autor == autor) {
+            databaze.delete(id);
+        }
+    }
 };

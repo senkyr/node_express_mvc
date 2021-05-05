@@ -1,9 +1,10 @@
 <%- include('../layout/hlavicka') %>
 
 <a href="/uzivatel/profil">Zpět na profil</a>
+<a href="/poznamka/pridani">Přidat poznámku</a>
 
 <div>
-    <% if(!poznamky) { %>
+    <% if(poznamky. length == 0) { %>
         <b>Nemáte dosud žádné poznámky.</b>
     <% } else { %>
         <% poznamky.forEach((poznamka) => { %>

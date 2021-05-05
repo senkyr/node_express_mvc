@@ -10,23 +10,23 @@ const bcrypt = require('bcrypt');
 const jsondb = require('simple-json-db');
 
 // pripojeni k databazi
-const db_uzivatele = new jsondb(path.join('..', 'data', 'uzivatele.json'));
+const databaze = new jsondb(path.join('..', 'data', 'uzivatele.json'));
 
 // overeni existence daneho uzivatele
 exports.existuje = (jmeno) => {
-    return db_uzivatele.has(jmeno);
+    return databaze.has(jmeno);
 };
 
 // overeni hesla daneho uzivatele
 exports.overit = (jmeno, heslo) => {
-    let uzivatel = db_uzivatele.get(jmeno);
+    let uzivatel = databaze.get(jmeno);
 
     return bcrypt.compareSync(heslo, uzivatel.heslo);
 };
 
 // pridani noveho uzivatele do databaze
 exports.pridat = (jmeno, heslo, email) => {
-    db_uzivatele.set(jmeno, {
+    databaze.set(jmeno, {
         heslo: bcrypt.hashSync(heslo, 10),
         email: email,
     });
@@ -34,5 +34,5 @@ exports.pridat = (jmeno, heslo, email) => {
 
 // odebrani uzivatele z databaze
 exports.odebrat = (jmeno) => {
-    db_uzivatele.delete(jmeno);
+    databaze.delete(jmeno);
 };
