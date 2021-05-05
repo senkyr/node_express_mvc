@@ -45,7 +45,7 @@ exports.pridani = (dotaz, odpoved) => {
 };
 exports.prehled = (dotaz, odpoved) => {
     let autor = uzivatel_controller.prihlaseny(dotaz);
-    let poznamky = model.vsechny(autor);
+    let poznamky = model.vsechny(autor).reverse();
 
     odpoved.render('poznamka/prehled', {
         titulek: 'Moje poznámky',
