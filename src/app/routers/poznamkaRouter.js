@@ -12,13 +12,13 @@ const express = require('express');
 const router = express.Router();
 
 // pouzity controller
-const poznamkaController = require(path.join(__dirname, '..', 'controllers', 'poznamkaController'));
+const controller = require(path.join(__dirname, '..', 'controllers', 'poznamkaController'));
 
 // prevod HTTP pozadavku na akce controlleru (metoda POST)
-router.post('/pridat', poznamkaController.pridat);
+router.post('/pridat', controller.pridat);
 // prevod HTTP pozadavku na renderovani views (metoda GET)
-router.get('/pridani', poznamkaController.pridani);
-router.get('/vsechny', poznamkaController.vsechny);
+router.get('/pridani', controller.pridani);
+router.get('/vsechny', controller.vsechny);
 
 // export vysledneho routeru
 module.exports = router;

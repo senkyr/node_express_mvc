@@ -7,7 +7,7 @@
 const path = require('path');
 
 // pouzity model
-const Uzivatel = require(path.join(__dirname, '..', 'models', 'uzivatel'));
+const model = require(path.join(__dirname, '..', 'models', 'uzivatel'));
 
 // informace o prihlasenem uzivateli
 exports.informace = (dotaz, odpoved) => {
@@ -24,10 +24,10 @@ exports.registrovat = (dotaz, odpoved) => {
     let heslo = dotaz.body.heslo;
     let email = dotaz.body.email;
 
-    if(Uzivatel.existuje(jmeno)) {
+    if(model.existuje(jmeno)) {
         odpoved.json({ uspech: false, hlaseni: 'Vyberte jiné jméno.'});
     } else {
-        Uzivatel.pridat(jmeno, heslo, email);
+        model.pridat(jmeno, heslo, email);
 
         odpoved.json({ uspech: true, url: '/uzivatel/prihlaseni' });
     }
@@ -38,10 +38,10 @@ exports.prihlasit = (dotaz, odpoved) => {
     let jmeno = dotaz.body.jmeno;
     let heslo = dotaz.body.heslo;
 
-    if(!Uzivatel.existuje(jmeno)) {
+    if(!model.existuje(jmeno)) {
         odpoved.json({ uspech: false, hlaseni: 'Uživatel neexistuje.'});
     } else {
-        if(!Uzivatel.overit(jmeno, heslo)) {
+        if(!model.overit(jmeno, heslo)) {
             odpoved.json({ uspech: false, hlaseni: 'Chybné heslo.'});
         } else {
             dotaz.session.uzivatel = jmeno;
@@ -56,10 +56,10 @@ exports.smazat = (dotaz, odpoved) => {
     let jmeno = dotaz.session.uzivatel;
     let heslo = dotaz.body.heslo;
 
-    if(!Uzivatel.overit(jmeno, heslo)) {
+    if(!model.overit(jmeno, heslo)) {
         odpoved.json({ uspech: false, hlaseni: 'Chybné heslo.'});
     } else {
-        Uzivatel.odebrat(jmeno);
+        model.odebrat(jmeno);
 
         odpoved.json({ uspech: true, url: '/uzivatel/odhlasit' });
     }

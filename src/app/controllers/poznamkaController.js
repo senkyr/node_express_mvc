@@ -7,7 +7,7 @@
 const path = require('path');
 
 // pouzity model
-const Poznamka = require(path.join(__dirname, '..', 'models', 'poznamka.js'));
+const model = require(path.join(__dirname, '..', 'models', 'poznamka.js'));
 
 // pomocny controller
 const uzivatel_controller = require(path.join(__dirname, '..', 'controllers', 'uzivatelController'));
@@ -19,7 +19,7 @@ exports.pridat = (dotaz, odpoved) => {
     let cas = new Date();
     let autor = uzivatel_controller.prihlaseny(dotaz, odpoved);
     
-    Poznamka.nova(nadpis, telo, cas, autor);
+    model.nova(nadpis, telo, cas, autor);
 
     odpoved.json({
         uspech: true,
@@ -36,7 +36,7 @@ exports.pridani = (dotaz, odpoved) => {
 };
 exports.vsechny = (dotaz, odpoved) => {
     let autor = uzivatel_controller.prihlaseny(dotaz, odpoved);
-    let poznamky = Poznamka.vlastni(autor);
+    let poznamky = model.vlastni(autor);
 
     odpoved.render('poznamka/vsechny', {
         titulek: 'Moje poznámky',
